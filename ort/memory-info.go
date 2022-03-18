@@ -64,13 +64,13 @@ func (i *memoryInfo) ReleaseMemoryInfo() {
 func getCAllocatorTypeForAllocatorType(allocatorType AllocatorType) (C.OrtAllocatorType, error) {
 	switch allocatorType {
 	case AllocatorTypeInvalid:
-		return C.Invalid, nil
+		return C.OrtInvalidAllocator, nil
 	case AllocatorTypeDevice:
 		return C.OrtDeviceAllocator, nil
 	case AllocatorTypeArena:
 		return C.OrtArenaAllocator, nil
 	}
-	return C.Invalid, fmt.Errorf("invalid allocator type %d", allocatorType)
+	return C.OrtInvalidAllocator, fmt.Errorf("invalid allocator type %d", allocatorType)
 }
 
 func getCMemTypeForMemType(memType MemType) (C.OrtMemType, error) {
