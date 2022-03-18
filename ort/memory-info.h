@@ -3,12 +3,21 @@
 
 #include <core/session/onnxruntime_c_api.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct OrtCreateCpuMemoryInfoResponse {
-    OrtMemoryInfo *memoryInfo;
-    OrtStatus *status;
+  OrtMemoryInfo *memoryInfo;
+  OrtStatus *status;
 } OrtCreateCpuMemoryInfoResponse;
 
-OrtCreateCpuMemoryInfoResponse createCpuMemoryInfo(OrtApi *api, OrtAllocatorType allocatorType, OrtMemType memType);
+OrtCreateCpuMemoryInfoResponse createCpuMemoryInfo(
+    OrtApi *api, OrtAllocatorType allocatorType, OrtMemType memType);
 void releaseMemoryInfo(OrtApi *api, OrtMemoryInfo *memoryInfo);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

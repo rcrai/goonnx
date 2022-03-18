@@ -1,118 +1,125 @@
-extern "C" {
-    #include <core/session/onnxruntime_c_api.h>
-    #include <stdio.h>
-    #include "session.h"
+#include "session.h"
 
-    OrtCreateSessionResponse createSession(OrtApi *api, OrtEnv *env, const char *modelPath, OrtSessionOptions *sessionOptions) {
-        OrtSession *session;
-        OrtStatus *status;
+#include <core/session/onnxruntime_c_api.h>
+#include <stdio.h>
 
-        status = api->CreateSession(env, modelPath, sessionOptions, &session);
+OrtCreateSessionResponse createSession(OrtApi *api, OrtEnv *env,
+                                       const char *modelPath,
+                                       OrtSessionOptions *sessionOptions) {
+  OrtSession *session;
+  OrtStatus *status;
 
-        OrtCreateSessionResponse response;
-        response.session = session;
-        response.status = status;
+  status = api->CreateSession(env, modelPath, sessionOptions, &session);
 
-        return response;
-    }
+  OrtCreateSessionResponse response;
+  response.session = session;
+  response.status = status;
 
-    void releaseSession(OrtApi *api, OrtSession *session) {
-        api->ReleaseSession(session);
-    }
+  return response;
+}
 
-    void releaseSessionOptions(OrtApi *api, OrtSessionOptions *opts) {
-        api->ReleaseSessionOptions(opts);
-    }
+void releaseSession(OrtApi *api, OrtSession *session) {
+  api->ReleaseSession(session);
+}
 
-    OrtGetIOCountResponse getInputCount(OrtApi *api, OrtSession *session) {
-        size_t numInputNodes;
-        OrtStatus *status;
+void releaseSessionOptions(OrtApi *api, OrtSessionOptions *opts) {
+  api->ReleaseSessionOptions(opts);
+}
 
-        status = api->SessionGetInputCount(session, &numInputNodes);
+OrtGetIOCountResponse getInputCount(OrtApi *api, OrtSession *session) {
+  size_t numInputNodes;
+  OrtStatus *status;
 
-        OrtGetIOCountResponse response;
-        response.numNodes = numInputNodes;
-        response.status = status;
+  status = api->SessionGetInputCount(session, &numInputNodes);
 
-        return response;
-    }
+  OrtGetIOCountResponse response;
+  response.numNodes = numInputNodes;
+  response.status = status;
 
-    OrtGetIONameResponse getInputName(OrtApi *api, OrtSession *session, size_t i, OrtAllocator *allocator) {
-        char *inputName;
-        OrtStatus *status;
+  return response;
+}
 
-        api->SessionGetInputName(session, i, allocator, &inputName);
+OrtGetIONameResponse getInputName(OrtApi *api, OrtSession *session, size_t i,
+                                  OrtAllocator *allocator) {
+  char *inputName;
+  OrtStatus *status;
 
-        OrtGetIONameResponse response;
-        response.name = inputName;
-        response.status = status;
+  api->SessionGetInputName(session, i, allocator, &inputName);
 
-        return response;
-    }
+  OrtGetIONameResponse response;
+  response.name = inputName;
+  response.status = status;
 
-    OrtGetIOTypeInfoResponse getInputTypeInfo(OrtApi *api, OrtSession *session, size_t i) {
-        OrtTypeInfo *typeInfo;
-        OrtStatus *status;
+  return response;
+}
 
-        status = api->SessionGetInputTypeInfo(session, i, &typeInfo);
+OrtGetIOTypeInfoResponse getInputTypeInfo(OrtApi *api, OrtSession *session,
+                                          size_t i) {
+  OrtTypeInfo *typeInfo;
+  OrtStatus *status;
 
-        OrtGetIOTypeInfoResponse response;
-        response.typeInfo = typeInfo;
-        response.status = status;
+  status = api->SessionGetInputTypeInfo(session, i, &typeInfo);
 
-        return response;
-    }
+  OrtGetIOTypeInfoResponse response;
+  response.typeInfo = typeInfo;
+  response.status = status;
 
-    OrtGetIOCountResponse getOutputCount(OrtApi *api, OrtSession *session) {
-        size_t numOutputNodes;
-        OrtStatus *status;
+  return response;
+}
 
-        status = api->SessionGetOutputCount(session, &numOutputNodes);
+OrtGetIOCountResponse getOutputCount(OrtApi *api, OrtSession *session) {
+  size_t numOutputNodes;
+  OrtStatus *status;
 
-        OrtGetIOCountResponse response;
-        response.numNodes = numOutputNodes;
-        response.status = status;
+  status = api->SessionGetOutputCount(session, &numOutputNodes);
 
-        return response;
-    }
+  OrtGetIOCountResponse response;
+  response.numNodes = numOutputNodes;
+  response.status = status;
 
-    OrtGetIONameResponse getOutputName(OrtApi *api, OrtSession *session, size_t i, OrtAllocator *allocator) {
-        char *outputName;
-        OrtStatus *status;
+  return response;
+}
 
-        api->SessionGetOutputName(session, i, allocator, &outputName);
+OrtGetIONameResponse getOutputName(OrtApi *api, OrtSession *session, size_t i,
+                                   OrtAllocator *allocator) {
+  char *outputName;
+  OrtStatus *status;
 
-        OrtGetIONameResponse response;
-        response.name = outputName;
-        response.status = status;
+  api->SessionGetOutputName(session, i, allocator, &outputName);
 
-        return response;
-    }
+  OrtGetIONameResponse response;
+  response.name = outputName;
+  response.status = status;
 
-    OrtGetIOTypeInfoResponse getOutputTypeInfo(OrtApi *api, OrtSession *session, size_t i) {
-        OrtTypeInfo *typeInfo;
-        OrtStatus *status;
+  return response;
+}
 
-        status = api->SessionGetOutputTypeInfo(session, i, &typeInfo);
+OrtGetIOTypeInfoResponse getOutputTypeInfo(OrtApi *api, OrtSession *session,
+                                           size_t i) {
+  OrtTypeInfo *typeInfo;
+  OrtStatus *status;
 
-        OrtGetIOTypeInfoResponse response;
-        response.typeInfo = typeInfo;
-        response.status = status;
+  status = api->SessionGetOutputTypeInfo(session, i, &typeInfo);
 
-        return response;
-    }
+  OrtGetIOTypeInfoResponse response;
+  response.typeInfo = typeInfo;
+  response.status = status;
 
-    OrtRunResponse run(OrtApi *api, OrtSession *session, OrtRunOptions *runOptions, char **inputNames, OrtValue **input,
-            size_t inputLen, char **outputNames, size_t outputNamesLen) {
-        OrtValue *output = NULL;
-        OrtStatus *status;
+  return response;
+}
 
-        status = api->Run(session, runOptions, inputNames, input, inputLen, outputNames, outputNamesLen, &output);
+OrtRunResponse run(OrtApi *api, OrtSession *session, OrtRunOptions *runOptions,
+                   char **inputNames, OrtValue **input, size_t inputLen,
+                   char **outputNames, size_t outputNamesLen) {
+  OrtValue *output = NULL;
+  OrtStatus *status;
 
-        OrtRunResponse response;
-        response.output = output;
-        response.status = status;
+  status = api->Run(session, runOptions, inputNames, input, inputLen,
+                    outputNames, outputNamesLen, &output);
 
-        return response;
-    }
+  OrtRunResponse response;
+  response.output = output;
+  response.status = status;
+
+  return response;
 }

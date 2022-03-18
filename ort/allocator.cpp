@@ -1,17 +1,16 @@
-extern "C" {
-    #include <core/session/onnxruntime_c_api.h>
-    #include "allocator.h"
+#include "allocator.h"
 
-    GetAllocatorResponse getAllocatorWithDefaultOptions(OrtApi *api) {
-        OrtAllocator *allocator;
-        OrtStatus *status;
+#include <core/session/onnxruntime_c_api.h>
 
-        status = api->GetAllocatorWithDefaultOptions(&allocator);
+GetAllocatorResponse getAllocatorWithDefaultOptions(OrtApi *api) {
+  OrtAllocator *allocator;
+  OrtStatus *status;
 
-        GetAllocatorResponse response;
-        response.allocator = allocator;
-        response.status = status;
+  status = api->GetAllocatorWithDefaultOptions(&allocator);
 
-        return response;
-    }
+  GetAllocatorResponse response;
+  response.allocator = allocator;
+  response.status = status;
+
+  return response;
 }

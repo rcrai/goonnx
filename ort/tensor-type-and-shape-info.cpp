@@ -1,60 +1,62 @@
-extern "C" {
-    #include <core/session/onnxruntime_c_api.h>
-    #include "tensor-type-and-shape-info.h"
+#include "tensor-type-and-shape-info.h"
 
-    OrtGetTensorElementTypeResponse getTensorElementType(OrtApi *api, OrtTensorTypeAndShapeInfo *typeInfo) {
-        ONNXTensorElementDataType dataType;
-        OrtStatus *status;
+#include <core/session/onnxruntime_c_api.h>
 
-        status = api->GetTensorElementType(typeInfo, &dataType);
+OrtGetTensorElementTypeResponse getTensorElementType(
+    OrtApi *api, OrtTensorTypeAndShapeInfo *typeInfo) {
+  ONNXTensorElementDataType dataType;
+  OrtStatus *status;
 
-        OrtGetTensorElementTypeResponse response;
-        response.dataType = dataType;
-        response.status = status;
+  status = api->GetTensorElementType(typeInfo, &dataType);
 
-        return response;
-    }
+  OrtGetTensorElementTypeResponse response;
+  response.dataType = dataType;
+  response.status = status;
 
-    OrtGetDimensionsCountResponse getDimensionsCount(OrtApi *api, OrtTensorTypeAndShapeInfo *typeInfo) {
-        size_t numDims;
-        OrtStatus *status;
+  return response;
+}
 
-        status = api->GetDimensionsCount(typeInfo, &numDims);
+OrtGetDimensionsCountResponse getDimensionsCount(
+    OrtApi *api, OrtTensorTypeAndShapeInfo *typeInfo) {
+  size_t numDims;
+  OrtStatus *status;
 
-        OrtGetDimensionsCountResponse response;
-        response.numDims = numDims;
-        response.status = status;
+  status = api->GetDimensionsCount(typeInfo, &numDims);
 
-        return response;
-    }
+  OrtGetDimensionsCountResponse response;
+  response.numDims = numDims;
+  response.status = status;
 
-    OrtGetDimensionsResponse getDimensions(OrtApi *api, OrtTensorTypeAndShapeInfo *typeInfo, size_t numDims) {
-        int64_t *dims;
-        OrtStatus *status;
+  return response;
+}
 
-        dims = (int64_t *)malloc(numDims * sizeof(int64_t));
+OrtGetDimensionsResponse getDimensions(OrtApi *api,
+                                       OrtTensorTypeAndShapeInfo *typeInfo,
+                                       size_t numDims) {
+  int64_t *dims;
+  OrtStatus *status;
 
-        status = api->GetDimensions(typeInfo, dims, numDims);
+  dims = (int64_t *)malloc(numDims * sizeof(int64_t));
 
-        OrtGetDimensionsResponse response;
-        response.dims = dims;
-        response.status = status;
+  status = api->GetDimensions(typeInfo, dims, numDims);
 
-        return response;
-    }
+  OrtGetDimensionsResponse response;
+  response.dims = dims;
+  response.status = status;
 
-    OrtGetSymbolicDimensionsResponse getSymbolicDimensions(OrtApi *api, OrtTensorTypeAndShapeInfo *typeInfo, size_t numDims) {
-        const char *dimParams;
-        OrtStatus *status;
+  return response;
+}
 
-        status = api->GetSymbolicDimensions(typeInfo, &dimParams, numDims);
+OrtGetSymbolicDimensionsResponse getSymbolicDimensions(
+    OrtApi *api, OrtTensorTypeAndShapeInfo *typeInfo, size_t numDims) {
+  const char *dimParams;
+  OrtStatus *status;
 
-        OrtGetSymbolicDimensionsResponse response;
-        response.status = status;
-        response.dimParams = dimParams;
+  status = api->GetSymbolicDimensions(typeInfo, &dimParams, numDims);
 
-        return response;
-    }
+  OrtGetSymbolicDimensionsResponse response;
+  response.status = status;
+  response.dimParams = dimParams;
 
-
+  return response;
 }

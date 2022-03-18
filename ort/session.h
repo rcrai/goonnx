@@ -3,42 +3,56 @@
 
 #include <core/session/onnxruntime_c_api.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct OrtCreateSessionResponse {
-	OrtSession *session;
-	OrtStatus *status;
+  OrtSession *session;
+  OrtStatus *status;
 } OrtCreateSessionResponse;
 
 typedef struct OrtGetIOCountResponse {
-	size_t numNodes;
-	OrtStatus *status;
+  size_t numNodes;
+  OrtStatus *status;
 } OrtGetIOCountResponse;
 
 typedef struct OrtGetIONameResponse {
-	char *name;
-	OrtStatus *status;
+  char *name;
+  OrtStatus *status;
 } OrtGetIONameResponse;
 
 typedef struct OrtGetIOTypeInfoResponse {
-	OrtTypeInfo *typeInfo;
-	OrtStatus *status;
+  OrtTypeInfo *typeInfo;
+  OrtStatus *status;
 } OrtGetIOTypeInfoResponse;
 
 typedef struct OrtRunResponse {
-    OrtValue *output;
-    OrtStatus *status;
+  OrtValue *output;
+  OrtStatus *status;
 } OrtRunResponse;
 
-OrtCreateSessionResponse createSession(OrtApi *api, OrtEnv *env, const char *modelPath,
-        OrtSessionOptions *sessionOptions);
+OrtCreateSessionResponse createSession(OrtApi *api, OrtEnv *env,
+                                       const char *modelPath,
+                                       OrtSessionOptions *sessionOptions);
 void releaseSession(OrtApi *api, OrtSession *session);
 void releaseSessionOptions(OrtApi *api, OrtSessionOptions *opts);
 OrtGetIOCountResponse getInputCount(OrtApi *api, OrtSession *session);
-OrtGetIONameResponse getInputName(OrtApi *api, OrtSession *session, size_t i, OrtAllocator *allocator);
-OrtGetIOTypeInfoResponse getInputTypeInfo(OrtApi *api, OrtSession *session, size_t i);
+OrtGetIONameResponse getInputName(OrtApi *api, OrtSession *session, size_t i,
+                                  OrtAllocator *allocator);
+OrtGetIOTypeInfoResponse getInputTypeInfo(OrtApi *api, OrtSession *session,
+                                          size_t i);
 OrtGetIOCountResponse getOutputCount(OrtApi *api, OrtSession *session);
-OrtGetIONameResponse getOutputName(OrtApi *api, OrtSession *session, size_t i, OrtAllocator *allocator);
-OrtGetIOTypeInfoResponse getOutputTypeInfo(OrtApi *api, OrtSession *session, size_t i);
-OrtRunResponse run(OrtApi *api, OrtSession *session, OrtRunOptions *runOptions, char **inputNames, OrtValue **input,
-        size_t inputLen, char **outputNames, size_t outputNamesLen);
+OrtGetIONameResponse getOutputName(OrtApi *api, OrtSession *session, size_t i,
+                                   OrtAllocator *allocator);
+OrtGetIOTypeInfoResponse getOutputTypeInfo(OrtApi *api, OrtSession *session,
+                                           size_t i);
+OrtRunResponse run(OrtApi *api, OrtSession *session, OrtRunOptions *runOptions,
+                   char **inputNames, OrtValue **input, size_t inputLen,
+                   char **outputNames, size_t outputNamesLen);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

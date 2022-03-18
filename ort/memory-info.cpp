@@ -1,21 +1,21 @@
-extern "C" {
-    #include <core/session/onnxruntime_c_api.h>
-    #include "memory-info.h"
+#include "memory-info.h"
 
-    OrtCreateCpuMemoryInfoResponse createCpuMemoryInfo(OrtApi *api, OrtAllocatorType allocatorType, OrtMemType memType) {
-        OrtMemoryInfo *memoryInfo;
-        OrtStatus *status;
+#include <core/session/onnxruntime_c_api.h>
 
-        status = api->CreateCpuMemoryInfo(allocatorType, memType, &memoryInfo);
+OrtCreateCpuMemoryInfoResponse createCpuMemoryInfo(
+    OrtApi *api, OrtAllocatorType allocatorType, OrtMemType memType) {
+  OrtMemoryInfo *memoryInfo;
+  OrtStatus *status;
 
-        OrtCreateCpuMemoryInfoResponse response;
-        response.memoryInfo = memoryInfo;
-        response.status = status;
+  status = api->CreateCpuMemoryInfo(allocatorType, memType, &memoryInfo);
 
-        return response;
-    }
+  OrtCreateCpuMemoryInfoResponse response;
+  response.memoryInfo = memoryInfo;
+  response.status = status;
 
-    void releaseMemoryInfo(OrtApi *api, OrtMemoryInfo *memoryInfo) {
-        api->ReleaseMemoryInfo(memoryInfo);
-    }
+  return response;
+}
+
+void releaseMemoryInfo(OrtApi *api, OrtMemoryInfo *memoryInfo) {
+  api->ReleaseMemoryInfo(memoryInfo);
 }

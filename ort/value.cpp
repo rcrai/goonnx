@@ -1,44 +1,46 @@
-extern "C" {
-    #include <core/session/onnxruntime_c_api.h>
-    #include "value.h"
+#include "value.h"
 
-    OrtCreateTensorWithDataAsOrtValueResponse createTensorWithDataAsOrtValue(OrtApi *api, OrtMemoryInfo *memoryInfo,
-            void *data, size_t dataLen, int64_t *shape, size_t shapeLen, ONNXTensorElementDataType type) {
-        OrtValue *value;
-        OrtStatus *status;
+#include <core/session/onnxruntime_c_api.h>
 
-        status = api->CreateTensorWithDataAsOrtValue(memoryInfo, data, dataLen, shape, shapeLen, type, &value);
+OrtCreateTensorWithDataAsOrtValueResponse createTensorWithDataAsOrtValue(
+    OrtApi *api, OrtMemoryInfo *memoryInfo, void *data, size_t dataLen,
+    int64_t *shape, size_t shapeLen, ONNXTensorElementDataType type) {
+  OrtValue *value;
+  OrtStatus *status;
 
-        OrtCreateTensorWithDataAsOrtValueResponse response;
-        response.value = value;
-        response.status = status;
+  status = api->CreateTensorWithDataAsOrtValue(memoryInfo, data, dataLen, shape,
+                                               shapeLen, type, &value);
 
-        return response;
-    }
+  OrtCreateTensorWithDataAsOrtValueResponse response;
+  response.value = value;
+  response.status = status;
 
-    OrtIsTensorResponse isTensor(OrtApi *api, OrtValue *value) {
-        int isTensor;
-        OrtStatus *status;
+  return response;
+}
 
-        status = api->IsTensor(value, &isTensor);
+OrtIsTensorResponse isTensor(OrtApi *api, OrtValue *value) {
+  int isTensor;
+  OrtStatus *status;
 
-        OrtIsTensorResponse response;
-        response.isTensor = isTensor;
-        response.status = status;
+  status = api->IsTensor(value, &isTensor);
 
-        return response;
-    }
+  OrtIsTensorResponse response;
+  response.isTensor = isTensor;
+  response.status = status;
 
-    OrtGetTensorMutableFloatDataResponse getTensorMutableFloatData(OrtApi *api, OrtValue *value) {
-        float *out;
-        OrtStatus *status;
+  return response;
+}
 
-        status = api->GetTensorMutableData(value, (void **)&out);
+OrtGetTensorMutableFloatDataResponse getTensorMutableFloatData(
+    OrtApi *api, OrtValue *value) {
+  float *out;
+  OrtStatus *status;
 
-        OrtGetTensorMutableFloatDataResponse response;
-        response.status = status;
-        response.out = out;
+  status = api->GetTensorMutableData(value, (void **)&out);
 
-        return response;
-    }
+  OrtGetTensorMutableFloatDataResponse response;
+  response.status = status;
+  response.out = out;
+
+  return response;
 }

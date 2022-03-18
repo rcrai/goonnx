@@ -1,21 +1,21 @@
-extern "C" {
-    #include <core/session/onnxruntime_c_api.h>
-    #include "type-info.h"
+#include "type-info.h"
 
-    void releaseTypeInfo(OrtApi *api, OrtTypeInfo *typeInfo) {
-        api->ReleaseTypeInfo(typeInfo);
-    }
+#include <core/session/onnxruntime_c_api.h>
 
-    OrtCastTypeInfoToTensorInfoResponse castTypeInfoToTensorInfo(OrtApi *api, OrtTypeInfo *typeInfo) {
-        const OrtTensorTypeAndShapeInfo *tensorInfo;
-        OrtStatus *status;
+void releaseTypeInfo(OrtApi *api, OrtTypeInfo *typeInfo) {
+  api->ReleaseTypeInfo(typeInfo);
+}
 
-        status = api->CastTypeInfoToTensorInfo(typeInfo, &tensorInfo);
+OrtCastTypeInfoToTensorInfoResponse castTypeInfoToTensorInfo(
+    OrtApi *api, OrtTypeInfo *typeInfo) {
+  const OrtTensorTypeAndShapeInfo *tensorInfo;
+  OrtStatus *status;
 
-        OrtCastTypeInfoToTensorInfoResponse response;
-        response.tensorInfo = tensorInfo;
-        response.status = status;
+  status = api->CastTypeInfoToTensorInfo(typeInfo, &tensorInfo);
 
-        return response;
-    }
+  OrtCastTypeInfoToTensorInfoResponse response;
+  response.tensorInfo = tensorInfo;
+  response.status = status;
+
+  return response;
 }
