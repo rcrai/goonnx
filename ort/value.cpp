@@ -1,5 +1,5 @@
 extern "C" {
-    #include <onnxruntime_c_api.h>
+    #include <core/session/onnxruntime_c_api.h>
     #include "value.h"
 
     OrtCreateTensorWithDataAsOrtValueResponse createTensorWithDataAsOrtValue(OrtApi *api, OrtMemoryInfo *memoryInfo,

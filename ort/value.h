@@ -1,7 +1,7 @@
 #ifndef GOONNX_ORT_VALUE
 #define GOONNX_ORT_VALUE
 
-#include <onnxruntime_c_api.h>
+#include <core/session/onnxruntime_c_api.h>
 
 typedef struct OrtCreateTensorWithDataAsOrtValueResponse {
     OrtValue *value;

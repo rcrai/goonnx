@@ -1,5 +1,5 @@
 extern "C" {
-    #include <onnxruntime_c_api.h>
+    #include <core/session/onnxruntime_c_api.h>
     #include "tensor-type-and-shape-info.h"
 
     OrtGetTensorElementTypeResponse getTensorElementType(OrtApi *api, OrtTensorTypeAndShapeInfo *typeInfo) {

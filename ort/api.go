@@ -1,8 +1,8 @@
 package ort
 
 /*
-#cgo LDFLAGS: -L/usr/local/lib/onnx -lonnxruntime
-#include <onnxruntime_c_api.h>
+#cgo pkg-config: libonnxruntime
+#include <core/session/onnxruntime_c_api.h>
 #include "api.h"
 */
 import "C"

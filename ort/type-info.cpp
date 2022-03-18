@@ -1,5 +1,5 @@
 extern "C" {
-    #include <onnxruntime_c_api.h>
+    #include <core/session/onnxruntime_c_api.h>
     #include "type-info.h"
 
     void releaseTypeInfo(OrtApi *api, OrtTypeInfo *typeInfo) {

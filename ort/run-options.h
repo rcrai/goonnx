@@ -1,7 +1,7 @@
 #ifndef GOONNX_RUN_OPTIONS
 #define GOONNX_RUN_OPTIONS
 
-#include <onnxruntime_c_api.h>
+#include <core/session/onnxruntime_c_api.h>
 typedef struct OrtCreateRunOptionsParameters {
 	const char *tag;
 	int logVerbosityLevel;

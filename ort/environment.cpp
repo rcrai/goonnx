@@ -1,5 +1,5 @@
 extern "C" {
-    #include <onnxruntime_c_api.h>
+    #include <core/session/onnxruntime_c_api.h>
     #include "environment.h"
 
     void logCustomWrapper(void *params, OrtLoggingLevel severity, const char *category, const char *logId, const char *codeLocation, const char *message) {

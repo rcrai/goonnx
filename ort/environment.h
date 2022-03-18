@@ -1,7 +1,7 @@
 #ifndef GOONNX_ORT_ENVIRONMENT
 #define GOONNX_ORT_ENVIRONMENT
 
-#include <onnxruntime_c_api.h>
+#include <core/session/onnxruntime_c_api.h>
 
 typedef struct OrtCreateEnvResponse {
     const OrtEnv *env;

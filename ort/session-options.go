@@ -1,7 +1,7 @@
 package ort
 
 /*
-#include <onnxruntime_c_api.h>
+#include <core/session/onnxruntime_c_api.h>
 #include "session-options.h"
 */
 import "C"

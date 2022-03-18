@@ -1,7 +1,7 @@
 #ifndef GOONNX_ORT_INPUT_TYPE_INFO
 #define GOONNX_ORT_INPUT_TYPE_INFO
 
-#include <onnxruntime_c_api.h>
+#include <core/session/onnxruntime_c_api.h>
 
 typedef struct OrtCastTypeInfoToTensorInfoResponse {
 	const OrtTensorTypeAndShapeInfo *tensorInfo;

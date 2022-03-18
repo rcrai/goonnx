@@ -1,7 +1,7 @@
 #ifndef GOONNX_ORT_TENSOR_TYPE_AND_SHAPE_INFO
 #define GOONNX_ORT_TENSOR_TYPE_AND_SHAPE_INFO
 
-#include <onnxruntime_c_api.h>
+#include <core/session/onnxruntime_c_api.h>
 
 typedef struct OrtGetTensorElementTypeResponse {
 	ONNXTensorElementDataType dataType;

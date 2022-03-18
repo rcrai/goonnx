@@ -1,7 +1,7 @@
 #ifndef GOONNX_ORT_MEMORY_INFO
 #define GOONNX_ORT_MEMORY_INFO
 
-#include <onnxruntime_c_api.h>
+#include <core/session/onnxruntime_c_api.h>
 
 typedef struct OrtCreateCpuMemoryInfoResponse {
     OrtMemoryInfo *memoryInfo;

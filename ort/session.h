@@ -1,7 +1,7 @@
 #ifndef GOONNX_ORT_SESSION
 #define GOONNX_ORT_SESSION
 
-#include <onnxruntime_c_api.h>
+#include <core/session/onnxruntime_c_api.h>
 
 typedef struct OrtCreateSessionResponse {
 	OrtSession *session;

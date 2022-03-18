@@ -1,7 +1,7 @@
 #ifndef GOONNX_ORT_SESSION_OPTIONS
 #define GOONNX_ORT_SESSION_OPTIONS
 
-#include <onnxruntime_c_api.h>
+#include <core/session/onnxruntime_c_api.h>
 
 typedef struct OrtCreateSessionOptionsParams {
 	ORTCHAR_T *optimizedModelFilePath;
